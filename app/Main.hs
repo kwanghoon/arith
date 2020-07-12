@@ -85,7 +85,7 @@ doProcess line = do
   putStrLn "Parsing..."
   exprSeqAst <- parsing parserSpec terminalList
   putStrLn "Pretty Printing..."
-  putStrLn (pprintAst exprSeqAst)
+  putStrLn (show exprSeqAst)
   
   
 readline msg = do

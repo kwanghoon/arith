@@ -4,40 +4,26 @@ import CommonParserUtil
 import Token
 import Expr
 
+noAction = \rhs -> ()
 
 parserSpec :: ParserSpec Token AST
 parserSpec = ParserSpec
   {
-    startSymbol = "AdditiveExpr'",
+    startSymbol = "Start",
     
     parserSpecList =
     [
-      ("AdditiveExpr' -> AdditiveExpr", \rhs -> get rhs 1),
+      ("Start -> AdditiveExpr", noAction),
 
-      ("AdditiveExpr -> AdditiveExpr + MultiplicativeExpr",
-        \rhs -> toAstExpr (
-          BinOp Expr.ADD (fromAstExpr (get rhs 1)) (fromAstExpr (get rhs 3))) ),
+      ("AdditiveExpr -> AdditiveExpr + PrimaryExpr", noAction),
 
-      ("AdditiveExpr -> AdditiveExpr - MultiplicativeExpr",
-        \rhs -> toAstExpr (
-          BinOp Expr.SUB (fromAstExpr (get rhs 1)) (fromAstExpr (get rhs 3))) ),
+      ("AdditiveExpr -> AdditiveExpr - PrimaryExpr", noAction),
 
-      ("AdditiveExpr -> MultiplicativeExpr", \rhs -> get rhs 1),
+      ("AdditiveExpr -> PrimaryExpr", noAction),
 
-      ("MultiplicativeExpr -> MultiplicativeExpr * PrimaryExpr",
-        \rhs -> toAstExpr (
-          BinOp Expr.MUL (fromAstExpr (get rhs 1)) (fromAstExpr (get rhs 3))) ),
+      ("PrimaryExpr -> integer_number", noAction),
 
-      ("MultiplicativeExpr -> MultiplicativeExpr / PrimaryExpr",
-        \rhs -> toAstExpr (
-          BinOp Expr.DIV (fromAstExpr (get rhs 1)) (fromAstExpr (get rhs 3))) ),
-
-      ("MultiplicativeExpr -> PrimaryExpr", \rhs -> get rhs 1),
-      
-      ("PrimaryExpr -> integer_number",
-        \rhs -> toAstExpr (Lit (read (getText rhs 1))) ),
-
-      ("PrimaryExpr -> ( AdditiveExpr )", \rhs -> get rhs 2)
+      ("PrimaryExpr -> ( AdditiveExpr )", noAction)
     ],
     
     baseDir = "./",
