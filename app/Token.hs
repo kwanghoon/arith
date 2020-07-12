@@ -7,8 +7,7 @@ data Token =
     END_OF_TOKEN
   | OPEN_PAREN  | CLOSE_PAREN
   | IDENTIFIER  | INTEGER_NUMBER
-  | ADD  | SUB  | MUL  | DIV
-  | EQ  | SEMICOLON
+  | ADD  | SUB 
   deriving (Eq, Show)
 
 tokenStrList :: [(Token,String)]
@@ -16,8 +15,7 @@ tokenStrList =
   [ (END_OF_TOKEN, "$"),
     (OPEN_PAREN, "("), (CLOSE_PAREN, ")"),
     (IDENTIFIER, "identifier"), (INTEGER_NUMBER, "integer_number"),
-    (ADD, "+"), (SUB, "-"), (MUL, "*"), (DIV, "/"),
-    (EQ, "="), (SEMICOLON, ";")  
+    (ADD, "+"), (SUB, "-")
   ]
 
 findTok tok [] = Nothing
