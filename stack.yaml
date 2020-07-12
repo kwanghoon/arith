@@ -30,7 +30,7 @@ resolver: lts-16.4
 #   - wai
 packages:
 - .
-- ../../yapb
+- ../yapb
 
 # Dependency packages to be pulled from upstream that are not in the resolver.
 # These entries can reference officially published versions as well as
