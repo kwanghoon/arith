@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0ece1e13c9b80f14276235888fe83f90e065c765ea7860bfedb76f7ccdf79e01
+-- hash: 25ee577d4767dc15e852e5fb6455623a4617b0bbffbb2e0ed46146dbd7ec2979
 
 name:           arith
 version:        0.1.0.0
@@ -34,6 +34,7 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , yapb >=0.1.2
   default-language: Haskell2010
 
 executable arith-exe
@@ -51,7 +52,7 @@ executable arith-exe
   build-depends:
       arith
     , base >=4.7 && <5
-    , yapb >=0.1.1
+    , yapb >=0.1.2
   default-language: Haskell2010
 
 test-suite arith-test
@@ -65,4 +66,5 @@ test-suite arith-test
   build-depends:
       arith
     , base >=4.7 && <5
+    , yapb >=0.1.2
   default-language: Haskell2010
