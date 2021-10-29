@@ -17,7 +17,7 @@ import System.IO
 
 main :: IO ()
 main = do
-  emacsServer (computeCand False)
+  emacsServer (computeCand True)
 
 -- Todo: The following part should be moved to the library.
 --       Arguments: lexerSpec, parserSpec
@@ -53,7 +53,7 @@ computeCand_ isSimpleMode programTextUptoCursor programTextAfterCursor = do
   (line, column, terminalListUptoCursor)  <- lexingWithLineColumn lexerSpec 1 1 programTextUptoCursor
   
   ast <-
-    (parsing False parserSpec terminalListUptoCursor
+    (parsing True parserSpec1 terminalListUptoCursor
       `catch` \e -> case e :: ParseError Token AST of  _ -> throw (ParseErrorWithLineCol line column e))
 
   successfullyParsed
