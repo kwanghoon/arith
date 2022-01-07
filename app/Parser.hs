@@ -4,35 +4,43 @@ import CommonParserUtil
 import Token
 import Expr
 
+-- | Utility
+rule prodRule action              = (prodRule, action, Nothing  )
+ruleWithPrec prodRule action prec = (prodRule, action, Just prec)
+ruleWithNoAction prodRule         = (prodRule, noAction, Nothing)
+
 noAction = \rhs -> ()
 
-parserSpec :: ParserSpec Token AST
-parserSpec = ParserSpec
-  {
-    startSymbol = "Start",
+-- | 
+-- parserSpec :: ParserSpec Token AST
+-- parserSpec = ParserSpec
+--   {
+--     startSymbol = "Start",
     
-    parserSpecList =
-    [
-      ("Start -> AdditiveExpr", noAction),
-
-      ("AdditiveExpr -> AdditiveExpr + PrimaryExpr", noAction),
-
-      ("AdditiveExpr -> AdditiveExpr - PrimaryExpr", noAction),
-
-      ("AdditiveExpr -> PrimaryExpr", noAction),
-
-      ("PrimaryExpr -> integer_number", noAction),
-
-      ("PrimaryExpr -> ( AdditiveExpr )", noAction)
-    ],
+--     tokenPrecAssoc = [],
     
-    baseDir = "./",
-    actionTblFile = "action_table.txt",  
-    gotoTblFile = "goto_table.txt",
-    grammarFile = "prod_rules.txt",
-    parserSpecFile = "mygrammar.grm",
-    genparserexe = "yapb-exe"
-  }
+--     parserSpecList =
+--     [
+--       ruleWithNoAction "Start -> AdditiveExpr",
+
+--       ruleWithNoAction "AdditiveExpr -> AdditiveExpr + PrimaryExpr",
+
+--       ruleWithNoAction "AdditiveExpr -> AdditiveExpr - PrimaryExpr",
+
+--       ruleWithNoAction "AdditiveExpr -> PrimaryExpr",
+
+--       ruleWithNoAction "PrimaryExpr -> integer_number",
+
+--       ruleWithNoAction "PrimaryExpr -> ( AdditiveExpr )"
+--     ],
+    
+--     baseDir = "./",
+--     actionTblFile = "action_table.txt",  
+--     gotoTblFile = "goto_table.txt",
+--     grammarFile = "prod_rules.txt",
+--     parserSpecFile = "mygrammar.grm",
+--     genparserexe = "yapb-exe"
+--   }
 
 
 parserSpec1 :: ParserSpec Token AST
@@ -40,25 +48,27 @@ parserSpec1 = ParserSpec
   {
     startSymbol = "Start",
     
+    tokenPrecAssoc = [],
+    
     parserSpecList =
     [
-      ("Start -> MultiplicativeExpr", noAction),   -- Changed
+      ruleWithNoAction "Start -> MultiplicativeExpr",   -- Changed
 
-      ("MultiplicativeExpr -> MultiplicativeExpr * AdditiveExpr", noAction),   -- New
+      ruleWithNoAction "MultiplicativeExpr -> MultiplicativeExpr * AdditiveExpr",   -- New
 
-      ("MultiplicativeExpr -> MultiplicativeExpr / AdditiveExpr", noAction),   -- New
+      ruleWithNoAction "MultiplicativeExpr -> MultiplicativeExpr / AdditiveExpr",   -- New
 
-      ("MultiplicativeExpr -> AdditiveExpr", noAction),            -- New
+      ruleWithNoAction "MultiplicativeExpr -> AdditiveExpr",            -- New
       
-      ("AdditiveExpr -> AdditiveExpr + PrimaryExpr", noAction),
+      ruleWithNoAction "AdditiveExpr -> AdditiveExpr + PrimaryExpr",
 
-      ("AdditiveExpr -> AdditiveExpr - PrimaryExpr", noAction),
+      ruleWithNoAction "AdditiveExpr -> AdditiveExpr - PrimaryExpr",
 
-      ("AdditiveExpr -> PrimaryExpr", noAction),
+      ruleWithNoAction "AdditiveExpr -> PrimaryExpr",
 
-      ("PrimaryExpr -> integer_number", noAction),
+      ruleWithNoAction "PrimaryExpr -> integer_number",
 
-      ("PrimaryExpr -> ( MultiplicativeExpr )", noAction)      -- Changed: MultiplicativeExpr
+      ruleWithNoAction "PrimaryExpr -> ( MultiplicativeExpr )" -- Changed: MultiplicativeExpr
     ],
     
     baseDir = "./",
