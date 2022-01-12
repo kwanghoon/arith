@@ -3,52 +3,23 @@ module Parser where
 import CommonParserUtil
 import Token
 import Expr
+import Lexer
 
 -- | Utility
 rule prodRule action              = (prodRule, action, Nothing  )
 ruleWithPrec prodRule action prec = (prodRule, action, Just prec)
 ruleWithNoAction prodRule         = (prodRule, noAction, Nothing)
 
-noAction = \rhs -> ()
+noAction = \rhs -> return ()
 
--- | 
--- parserSpec :: ParserSpec Token AST
--- parserSpec = ParserSpec
---   {
---     startSymbol = "Start",
-    
---     tokenPrecAssoc = [],
-    
---     parserSpecList =
---     [
---       ruleWithNoAction "Start -> AdditiveExpr",
-
---       ruleWithNoAction "AdditiveExpr -> AdditiveExpr + PrimaryExpr",
-
---       ruleWithNoAction "AdditiveExpr -> AdditiveExpr - PrimaryExpr",
-
---       ruleWithNoAction "AdditiveExpr -> PrimaryExpr",
-
---       ruleWithNoAction "PrimaryExpr -> integer_number",
-
---       ruleWithNoAction "PrimaryExpr -> ( AdditiveExpr )"
---     ],
-    
---     baseDir = "./",
---     actionTblFile = "action_table.txt",  
---     gotoTblFile = "goto_table.txt",
---     grammarFile = "prod_rules.txt",
---     parserSpecFile = "mygrammar.grm",
---     genparserexe = "yapb-exe"
---   }
-
-
-parserSpec1 :: ParserSpec Token AST
-parserSpec1 = ParserSpec
+parserSpec :: ParserSpec Token AST IO ()
+parserSpec = ParserSpec
   {
     startSymbol = "Start",
     
     tokenPrecAssoc = [],
+
+    chumLexerSpec = lexerSpec,
     
     parserSpecList =
     [
