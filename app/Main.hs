@@ -37,7 +37,7 @@ computeCand :: Bool -> String -> String -> Bool -> IO [EmacsDataItem]
 computeCand debug programTextUptoCursor programTextAfterCursor isSimpleMode =
   (
    (
-    (do ast <- parsing True parserSpec ((), 1, 1, programTextUptoCursor)
+    (do ast <- parsing True parserSpec ((), 1, 1, programTextUptoCursor) (aLexer lexerSpec)
         successfullyParsed)
 
 --      computeCand_ isSimpleMode programTextUptoCursor programTextAfterCursor
