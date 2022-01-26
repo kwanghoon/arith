@@ -20,6 +20,8 @@ lexerSpec = LexerSpec
         ("\\("    , mkFn OPEN_PAREN),
         ("\\)"    , mkFn CLOSE_PAREN),
         ("\\+"    , mkFn ADD),
-        ("\\-"    , mkFn SUB)
+        ("\\-"    , mkFn SUB),
+        ("\\*"    , mkFn MUL),
+        ("/"    , mkFn DIV)
       ]
   } 
