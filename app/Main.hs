@@ -12,6 +12,7 @@ import EmacsServer
 import SynCompInterface
 import Control.Exception
 import Data.Typeable
+import SynCompAlgorithm
 
 import System.IO
 
@@ -54,9 +55,11 @@ computeCand debug programTextUptoCursor programTextAfterCursor isSimpleMode =
          --   ParseErrorWithLineCol line column e ->
 
              do let (_,line,column,programTextAfterCursor) = lpStateFrom e
+                compCandidates <- chooseCompCandidatesFn
 
-                handleParseError (
-                  defaultHandleParseError {
+                handleParseError
+                  compCandidates
+                  (defaultHandleParseError {
                       debugFlag=debug,
                       searchMaxLevel=maxLevel,
                       simpleOrNested=isSimpleMode,
