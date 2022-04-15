@@ -59,13 +59,13 @@ computeCand debug programTextUptoCursor programTextAfterCursor isSimpleMode =
 
                 handleParseError
                   compCandidates
-                  (defaultHandleParseError {
+                  (defaultHandleParseError lexerSpec parserSpec) {
                       debugFlag=debug,
                       searchMaxLevel=maxLevel,
                       simpleOrNested=isSimpleMode,
                       postTerminalList=[],    -- terminalListAfterCursor is set to []!
                       nonterminalToStringMaybe=Nothing
-                      }) e
+                      } e
    )
     
 -- computeCand_ :: Bool -> String -> String -> IO [EmacsDataItem]
