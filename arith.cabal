@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2a5f9c5a3145961ff6bb5de942c4a208d34cf8b4c6c62900653849223c9d4a01
+-- hash: c0520ca308257106e65c37914b6417a40430cbd2e7a453db9ea3533136160fa6
 
 name:           arith
 version:        0.1.0.0
@@ -34,7 +34,8 @@ library
       src
   build-depends:
       base >=4.7 && <5
-    , yapb >=0.2.5
+    , hspec
+    , yapb >=0.2.7
   default-language: Haskell2010
 
 executable arith-exe
@@ -43,6 +44,7 @@ executable arith-exe
       Expr
       Lexer
       Parser
+      SyntaxCompletion
       Token
       Paths_arith
   hs-source-dirs:
@@ -52,19 +54,29 @@ executable arith-exe
   build-depends:
       arith
     , base >=4.7 && <5
-    , yapb >=0.2.5
+    , hspec
+    , yapb >=0.2.7
   default-language: Haskell2010
 
 test-suite arith-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Lexer
+      Main
+      Parser
+      SyntaxCompletion
+      Token
+      Expr
       Paths_arith
   hs-source-dirs:
       test
+      app
+      app/ast
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       arith
     , base >=4.7 && <5
-    , yapb >=0.2.5
+    , hspec
+    , yapb >=0.2.7
   default-language: Haskell2010
