@@ -16,29 +16,29 @@ noAction = \rhs -> return ()
 parserSpec :: ParserSpec Token AST IO ()
 parserSpec = ParserSpec
   {
-    startSymbol = "Start",
+    startSymbol = "E'",
     
     tokenPrecAssoc = [],
 
     parserSpecList =
     [
-      ruleWithNoAction "Start -> MultiplicativeExpr",   -- Changed
+      ruleWithNoAction "E' -> E",
 
-      ruleWithNoAction "MultiplicativeExpr -> MultiplicativeExpr * AdditiveExpr",   -- New
+      ruleWithNoAction "E -> E + M",
 
-      ruleWithNoAction "MultiplicativeExpr -> MultiplicativeExpr / AdditiveExpr",   -- New
+      ruleWithNoAction "E -> E - M",
 
-      ruleWithNoAction "MultiplicativeExpr -> AdditiveExpr",            -- New
+      ruleWithNoAction "E -> M",
       
-      ruleWithNoAction "AdditiveExpr -> AdditiveExpr + PrimaryExpr",
+      ruleWithNoAction "M -> M * A",
 
-      ruleWithNoAction "AdditiveExpr -> AdditiveExpr - PrimaryExpr",
+      ruleWithNoAction "M -> M / A",
 
-      ruleWithNoAction "AdditiveExpr -> PrimaryExpr",
+      ruleWithNoAction "M -> A",
 
-      ruleWithNoAction "PrimaryExpr -> integer_number",
+      ruleWithNoAction "A -> num",
 
-      ruleWithNoAction "PrimaryExpr -> ( MultiplicativeExpr )" -- Changed: MultiplicativeExpr
+      ruleWithNoAction "A -> ( E )" -- Changed: MultiplicativeExpr
     ],
     
     baseDir = "./",

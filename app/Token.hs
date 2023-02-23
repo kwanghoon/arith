@@ -14,7 +14,7 @@ tokenStrList :: [(Token,String)]
 tokenStrList =
   [ (END_OF_TOKEN, "$"),
     (OPEN_PAREN, "("), (CLOSE_PAREN, ")"),
-    (IDENTIFIER, "identifier"), (INTEGER_NUMBER, "integer_number"),
+    (IDENTIFIER, "identifier"), (INTEGER_NUMBER, "num"),
     (ADD, "+"), (SUB, "-"), (MUL, "*"), (DIV, "/")
   ]
 
